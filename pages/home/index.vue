@@ -5,6 +5,7 @@ import { useI18n } from 'vue-i18n';
 import { sectors } from '../../interfaces'
 import { tr } from 'date-fns/locale';
 const { t } = useI18n();
+const config = useRuntimeConfig();
 
 
 const sort = ref({
@@ -16,6 +17,7 @@ const currentBalance = ref(null);
 
 const monthlyIncome = ref(0);
 const monthlyOutcome = ref(0);
+const apiBaseUrl = config.public.API_BASE_URL;
 
 const isHovered = ref();
 const { data: transactionsData } = await useLazyFetch(`/api/home/transactions`, {

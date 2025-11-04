@@ -35,11 +35,11 @@ const userNavigation = ref([{ name: 'user.user', to: '/user', target: '_self', i
 
 const notificationCount = ref(0);
 
-const { refresh } = useFetch('/api/notifications/count', {
-    onResponse({ response }) {
-        notificationCount.value = response._data;
-    },
-});
+// const { refresh } = useFetch('/api/notifications/count', {
+//     onResponse({ response }) {
+//         notificationCount.value = response._data;
+//     },
+// });
 
 // const computedNotifications = computed(() => messagesStore.getMessages);
 
@@ -86,7 +86,7 @@ const notificationsNumberText = computed(() => (notificationCount.value > 9 ? '9
                     </div>
                     <div class="hidden md:block">
                         <div class="ml-4 flex items-center md:ml-6">
-                            <UButton
+                            <!-- <UButton
                                 type="button"
                                 class="flex gap-1 items-center relative rounded-full bg-primary-900 h-10 p-1.5 text-primary-100 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-600 mr-1"
                                 to="/notifications"
@@ -100,7 +100,7 @@ const notificationsNumberText = computed(() => (notificationCount.value > 9 ? '9
                                     {{ notificationsNumberText }}
                                 </div>
                                 <UIcon name="i-heroicons-bell" class="h-7 w-7" aria-hidden="true" />
-                            </UButton>
+                            </UButton> -->
 
                             <!-- Profile dropdown -->
                             <!-- v-if="status === 'authenticated'" -->
@@ -130,13 +130,15 @@ const notificationsNumberText = computed(() => (notificationCount.value > 9 ? '9
                                         class="absolute right-0 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                                     >
                                         <MenuItem v-for="item in userNavigation" :key="item.name" v-slot="{ active }">
-                                            <a
+                                            <NuxtLink
+                                                :to="item.to"
                                                 :class="[
                                                     active ? 'bg-primary-100' : '',
                                                     'block px-4 py-2 text-sm text-gray-700',
                                                 ]"
-                                                >{{ $t(item.name) }}</a
                                             >
+                                                {{ $t(item.name) }}
+                                            </NuxtLink>
                                         </MenuItem>
                                         <MenuItem v-slot="{ active }">
                                             <a
@@ -178,15 +180,20 @@ const notificationsNumberText = computed(() => (notificationCount.value > 9 ? '9
                     <DisclosureButton
                         v-for="item in navigation"
                         :key="item.name"
-                        as="a"
-                        :href="item.to"
-                        active-class="bg-primary-700 text-white"
-                        :class="[
-                            'text-white hover:bg-primary-500 hover:bg-opacity-75',
-                            'block rounded-md px-3 py-2 text-base font-medium',
-                        ]"
-                        >{{ $t(item.name) }}</DisclosureButton
+                        v-slot="{ close }"
                     >
+                        <NuxtLink
+                            :to="item.to"
+                            active-class="bg-primary-700 text-white"
+                            :class="[
+                                'text-white hover:bg-primary-500 hover:bg-opacity-75',
+                                'block rounded-md px-3 py-2 text-base font-medium',
+                            ]"
+                            @click="close"
+                        >
+                            {{ $t(item.name) }}
+                        </NuxtLink>
+                    </DisclosureButton>
                 </div>
                 <div class="border-t border-primary-700 pb-3 pt-4">
                     <!-- v-if="status === 'authenticated'" -->
@@ -198,7 +205,7 @@ const notificationsNumberText = computed(() => (notificationCount.value > 9 ? '9
                             <div class="text-base font-medium text-white">{{ session?.user?.name }}</div>
                             <div class="text-sm font-medium text-primary-300">{{ session?.user?.email }}</div>
                         </div> -->
-                        <UButton
+                        <!-- <UButton
                             type="button"
                             class="flex gap-1 items-center relative rounded-full bg-primary-70 h-10 p-1.5 text-primary-100 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-600"
                             to="/notifications"
@@ -212,7 +219,7 @@ const notificationsNumberText = computed(() => (notificationCount.value > 9 ? '9
                                 {{ notificationsNumberText }}
                             </div>
                             <UIcon name="i-heroicons-bell" class="h-7 w-7" aria-hidden="true" />
-                        </UButton>
+                        </UButton> -->
                     </div>
                     <!-- <UButton v-else class="ml-5" @click="signIn('keycloak')">
                         <ArrowRightOnRectangleIcon class="h-4 w-4" />

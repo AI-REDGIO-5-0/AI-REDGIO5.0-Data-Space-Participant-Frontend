@@ -352,7 +352,6 @@ const selectedPolicyId = ref(null);
 
 
 const handleRowClick = (policy: any) => {
-    console.log(policy)
     selectedPolicyId.value = policy.id;
     emit('select-policy', policy);
 };

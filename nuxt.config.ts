@@ -2,18 +2,13 @@
 export default defineNuxtConfig({
   runtimeConfig: {
     public: {
-      API_BASE_URL: process.env.API_BASE_URL || 'http://localhost:3010',
-        factoryUrl: '',
-        cloudUrl: '',
-        orgId: '',
-        orgLogo: '',
+      API_BASE_URL: '' ,
     },
     keycloak: {
         issuer: '',
         clientId: '',
         clientSecret: '',
     },
-
     authSecret: '',
     catalogName: '',
     walletAlias: '',
@@ -21,7 +16,6 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
    // Disable server-side rendering
    ssr: false,
-
    // Disable telemetry by Nuxt team
    telemetry: false,
 

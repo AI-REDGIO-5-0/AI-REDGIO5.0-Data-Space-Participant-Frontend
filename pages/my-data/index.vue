@@ -60,7 +60,10 @@ const {
     refresh,
 } = await useLazyFetch<any>('/api/datasets/get-all');
 
-const { page, filteredRows, paginatedRows, searchString, sortBy } = useTable<any>(modelsData, 5, {
+const pageCount = 5; // Match what you passed to useTable
+
+// Or update the useTable call:
+const { page, filteredRows, paginatedRows, searchString, sortBy } = useTable<any>(modelsData, pageCount, {
     column: 'date',
     direction: 'desc',
 });
@@ -135,7 +138,7 @@ async function deleteRepo() {
         modelForDeletion.value = null;
     }
 }
-const pageCount = 10
+
 </script>
 
 <template>
@@ -185,8 +188,9 @@ const pageCount = 10
             </UTable>
             <div v-if="filteredRows?.length > pageCount" class="flex justify-end mt-2">
                 <div class="mt-2">
-                    <UPagination v-model="page" :page-count="pageCount" :total="paginatedRows.length"
-                        :active-button="{ variant: 'outline' }" />
+                    <UPagination v-model="page" :page-count="pageCount" :total="filteredRows.length"
+    :active-button="{ variant: 'outline' }" />
+
                 </div>
             </div>
         </UCard>

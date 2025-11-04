@@ -3,7 +3,6 @@ import { v4 as uuidV4 } from 'uuid';
 import { z } from 'zod';
 
 import { DatasetKind } from '~/interfaces/dataset.enum';
-import { DownloadFrequency } from '~/interfaces/download-frequency.enum';
 import type { AccessPolicyDetails, AssetOfferingDetails } from '~/interfaces/plan-designer';
 
 const runtimeConfig = useRuntimeConfig();

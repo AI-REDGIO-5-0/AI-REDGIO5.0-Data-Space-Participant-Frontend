@@ -1,15 +1,14 @@
 <script setup>
-// import countries from '@/data/countries.json';
-// import sectors from '@/data/sectors.json';
 import { useI18n } from 'vue-i18n';
 import { useUserStore } from '@/store/user';
+import { countries } from '~/interfaces';
 const router = useRouter();
 const { t } = useI18n();
-// import sectors from '../../composables/sectors'
+
 const { data: session } = useAuth();
 
-const firstName = computed(() => session.value?.name.split(" ")[0] || '');
-const lastName = computed(() => session.value?.name.split(" ")[1] || '');
+const firstName = computed(() => session.value?.firstName)
+const lastName = computed(() => session.value?.lastName);
 const runtimeConfig = useRuntimeConfig();
 const profile = {
     name: '',
@@ -33,6 +32,9 @@ const profile = {
     participantID: '',
 };
 
+const country = computed(() => countries.map(c => {if(session.value.country === c.id) return c.name}));
+
+
 const schema = {
     name: 'string|required',
     surname: 'string|required',
@@ -48,13 +50,7 @@ const schema = {
         scope: 'string|required',
     },
 };
-//FIXME: Change this to retrieve info from keycloak
 
-const { data: user } = await useFetch('/api/users/get-user', {
-    method: 'GET',
-    query: { id: "a517ac00-6d23-40cb-a55d-89bec4afe8c1" },
-});
-console.log(user.value)
 </script>
 
 <template>
@@ -65,7 +61,7 @@ console.log(user.value)
                     <SubHeading :title="$t('user.user')" :info="$t('user.info')" />
                 </template>
 
-                <UForm v-if="user" class="flex flex-col space-y-2 " :state="profile" :schema="schema"
+                <UForm v-if="session" class="flex flex-col space-y-2 " :state="profile" :schema="schema"
                     :validate-on="['input', 'submit', 'blur', 'change']">
 
                     <div class="flex flex-row w-full space-x-2">
@@ -85,13 +81,13 @@ console.log(user.value)
                         </UFormGroup>
                         <!-- Country -->
                         <UFormGroup :label="$t('user.organisation.country')" required name="organisation.country">
-                            <USelectMenu :disabled="true" v-model="session.user.country" :options="countries" />
+                            <USelectMenu :disabled="true" v-model="country[0]" :options="countries" />
                         </UFormGroup>
                     </div>
                     <div class="flex flex-row w-full space-x-2">
                         <!-- Organisation -->
                         <UFormGroup :label="$t('user.organisation.name')" required name="organisation.name">
-                            <UInput :disabled="true" v-model="session.user.owner" />
+                            <UInput :disabled="true" v-model="session.user.orgName" />
                         </UFormGroup>
 
                         <UFormGroup :label="$t('user.organisation.address')" required name="organisation.address">

@@ -5,7 +5,7 @@ import { z } from 'zod';
 
 import { licenses } from '~/constants/licenses';
 import type CardSelection from '~/interfaces/card-selection';
-import { DownloadFrequency } from '~/interfaces/download-frequency.enum';
+
 
 
 const { showErrorMessage } = useAlertMessage();
