@@ -112,6 +112,7 @@ export const authOptions = {
                 token.address = getUserAttribute(decodedJWT, 'organisationAddress');
                 token.city = getUserAttribute(decodedJWT, 'organizationCity');
                 token.orgName = getUserAttribute(decodedJWT, 'organisationName');
+                token.orgId = getUserAttribute(decodedJWT, 'organisationId');
                 if (account.expires_at) {
                     token.expires_at = (account.expires_at - 15) * 1000;
                 }

@@ -71,7 +71,7 @@ const notificationsNumberText = computed(() => (notificationCount.value > 9 ? '9
                                     :to="item.to"
                                     :target="item.target"
                                     :external="item.external"
-                                    class="text-white hover:bg-primary-600 hover:bg-opacity-75 rounded-md px-3 py-2 text-sm font-medium"
+                                    class="text-primary-400 hover:bg-primary-400 hover:bg-opacity-80 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                                     active-class="bg-primary-800"
                                 >
                                     {{ $t(item.name) }}
@@ -244,7 +244,7 @@ const notificationsNumberText = computed(() => (notificationCount.value > 9 ? '9
         <footer class="bg-primary-900 flex p-4 text-xs justify-center align-center">
             <div class="flex w-full max-w-[1210px] gap-4">
                 <img class="w-12 h-8" src="/img/eu_flag.jpeg" alt="AI REDGIO 5.0 logo" />
-                <p class="text-white">
+                <p class="text-primary-400">
                     This project has received funding from the European Union under Grant Agreement n° 101092069. Views
                     and opinions expressed are however those of the author(s) only and do not necessarily reflect those
                     of the European Union or the European Commission. Neither the European Union nor the granting

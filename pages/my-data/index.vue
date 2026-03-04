@@ -58,7 +58,7 @@ const {
     pending: modelsLoading,
     error: modelsFetchError,
     refresh,
-} = await useLazyFetch<any>('/api/datasets/get-all');
+} = useLazyFetch<any>('/api/datasets/get-all');
 
 const pageCount = 5; // Match what you passed to useTable
 

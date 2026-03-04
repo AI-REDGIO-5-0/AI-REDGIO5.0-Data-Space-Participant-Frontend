@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 definePageMeta({
-    // middleware: 'auth',
+    middleware: 'auth',
     auth: false,
     layout: 'home',
 });
@@ -37,8 +37,8 @@ const callbackUrl = '/home';
                             </div>
                             <!-- v-if="status === 'authenticated'" -->
                             <NuxtLink
-                                
-                                :to="'/home/'"
+
+                                :to="'/home'"
                                 class="flex-shrink-0 rounded-md px-4 py-2 text-lg font-medium text-white hover:primary-text-950 hover:border hover:border-white cursor-pointer transition-all"
                                 >Home</NuxtLink
                             >

@@ -20,7 +20,7 @@ const monthlyOutcome = ref(0);
 const apiBaseUrl = config.public.API_BASE_URL;
 
 const isHovered = ref();
-const { data: transactionsData } = await useLazyFetch(`/api/home/transactions`, {
+const { data: transactionsData } = useLazyFetch<any[]>(`/api/home/transactions`, {
     method: 'GET',
 });
 
@@ -66,9 +66,10 @@ const page = ref<number>(1);
 const pageCount = 10;
 
 const transactionsRows = computed(() => {
-    return !R.isNil(transactionsData.value)
-        ? transactionsData.value.slice((page.value - 1) * pageCount, page.value * pageCount)
-        : [];
+    return transactionsData.value ? transactionsData.value.slice((page.value - 1) * pageCount, page.value * pageCount) : [];
+    // return !R.isNil(transactionsData.value)
+    //     ? transactionsData.value.slice((page.value - 1) * pageCount, page.value * pageCount)
+    //     : [];
 });
 
 const findSector = (sector: any) => {
@@ -96,7 +97,7 @@ const findSector = (sector: any) => {
                             <div class="text-center">
                                 <span >{{ dayjs(row.date).format('DD/MM/YYYY') }}</span>
                             </div>
-                            
+
                         </template>
                         <template #type-data="{ row }">
                             <div class="text-center">
@@ -129,8 +130,8 @@ const findSector = (sector: any) => {
                         </template>
                     </UTable>
                     <!-- Display the pagination only if the total number of transactions is larger than the page count -->
-                    <div v-if="transactionsData && transactionsData?.length > pageCount" class="flex justify-end mt-2">
-                        <UPagination v-model="page" :page-count="pageCount" :total="transactionsData?.length"
+                    <div v-if="transactionsData && transactionsData.length > pageCount" class="flex justify-end mt-2">
+                        <UPagination v-model="page" :page-count="pageCount" :total="transactionsData.length"
                             :active-button="{ variant: 'outline' }" />
                     </div>
                 </UCard>

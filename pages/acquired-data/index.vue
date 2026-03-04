@@ -54,7 +54,7 @@ const {
     pending: modelsLoading,
     error: modelsFetchError,
     refresh,
-} = await useLazyFetch<any>('/api/datasets/get-all-acquired');
+} = useLazyFetch<any>('/api/datasets/get-all-acquired');
 
 const { page, filteredRows, paginatedRows, searchString, sortBy } = useTable<any>(modelsData, 5, {
     column: 'date',
